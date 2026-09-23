@@ -1,0 +1,8 @@
+{
+  "name": "railway-linux-panel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A secure lightweight control panel for small Railway services.",
+  "scripts": {"start": "node panel/server.js"},
+  "engines": {"node": ">=22"}
+}
