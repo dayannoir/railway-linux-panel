@@ -1,8 +1,14 @@
 {
-  "name": "railway-linux-panel",
+  "name": "railway-universal-starter",
   "version": "1.0.0",
   "private": true,
-  "description": "A secure lightweight control panel for small Railway services.",
-  "scripts": {"start": "node panel/server.js"},
-  "engines": {"node": ">=22"}
+  "description": "A lightweight Railway starter for websites, APIs and bots.",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {}
 }
