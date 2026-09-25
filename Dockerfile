@@ -2,11 +2,9 @@ FROM node:22-bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     NODE_ENV=production \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PORT=8080 \
-    MODE=web \
-    START_CMD=""
+    DATA_ROOT=/data \
+    PANEL_USERNAME=admin \
+    PANEL_PASSWORD=admin
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -16,14 +14,9 @@ RUN apt-get update \
     && python3 -m pip install --no-cache-dir --break-system-packages --upgrade pip setuptools wheel
 
 WORKDIR /app
-COPY app/server.js /app/app/server.js
-COPY entrypoint.sh /usr/local/bin/railway-entrypoint
-COPY examples /app/examples
 COPY package.json /app/package.json
-
-RUN chmod +x /usr/local/bin/railway-entrypoint \
-    && npm install --omit=dev --ignore-scripts --no-audit --no-fund
+COPY panel /app/panel
 
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["/usr/local/bin/railway-entrypoint"]
+CMD ["node", "panel/server.js"]
